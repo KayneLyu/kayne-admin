@@ -12,11 +12,19 @@ const columns: Array<TableColumns> = [
     prop: "date"
   },
   {
-    label: "日期",
+    label: "创建日期",
     prop: "date"
   },
   {
     label: "订单状态",
+    prop: "name"
+  },
+  {
+    label: "到货日期",
+    prop: "name"
+  },
+  {
+    label: "备注",
     prop: "name"
   },
   {
