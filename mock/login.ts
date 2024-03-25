@@ -6,7 +6,7 @@ export default defineFakeRoute([
     url: "/login",
     method: "post",
     response: ({ body }) => {
-      if (body.username === "admin") {
+      if (body.username === "admin" && body.password === "admin1024") {
         return {
           success: true,
           data: {

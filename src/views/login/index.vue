@@ -3,7 +3,7 @@ import Motion from "./utils/motion";
 import { useRouter } from "vue-router";
 import { message } from "@/utils/message";
 import { loginRules } from "./utils/rule";
-import { useNav } from "@/layout/hooks/useNav";
+// import { useNav } from "@/layout/hooks/useNav";
 import type { FormInstance } from "element-plus";
 import { useLayout } from "@/layout/hooks/useLayout";
 import { useUserStoreHook } from "@/store/modules/user";
@@ -30,7 +30,7 @@ initStorage();
 
 const { dataTheme, dataThemeChange } = useDataThemeChange();
 dataThemeChange();
-const { title } = useNav();
+// const { title } = useNav();
 
 const ruleForm = reactive({
   username: "admin",
@@ -43,7 +43,10 @@ const onLogin = async (formEl: FormInstance | undefined) => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       useUserStoreHook()
-        .loginByUsername({ username: ruleForm.username, password: "admin123" })
+        .loginByUsername({
+          username: ruleForm.username,
+          password: ruleForm.password
+        })
         .then(res => {
           if (res.success) {
             // 获取后端路由
@@ -95,9 +98,9 @@ onBeforeUnmount(() => {
       </div>
       <div class="login-box">
         <div class="login-form">
-          <avatar class="avatar" />
           <Motion>
-            <h2 class="outline-none">{{ title }}</h2>
+            <img :src="avatar" class="mb-5" />
+            <!-- <h2 class="outline-none"></h2> -->
           </Motion>
 
           <el-form

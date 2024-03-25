@@ -127,26 +127,28 @@ const transitionMain = defineComponent({
                 <backTop />
               </el-backtop>
               <div class="grow">
-                <transitionMain :route="route">
-                  <keep-alive
-                    v-if="isKeepAlive"
-                    :include="usePermissionStoreHook().cachePageList"
-                  >
+                <div class="grow_content">
+                  <transitionMain :route="route">
+                    <keep-alive
+                      v-if="isKeepAlive"
+                      :include="usePermissionStoreHook().cachePageList"
+                    >
+                      <component
+                        :is="Comp"
+                        :key="fullPath"
+                        :frameInfo="frameInfo"
+                        class="main-content"
+                      />
+                    </keep-alive>
                     <component
                       :is="Comp"
+                      v-else
                       :key="fullPath"
                       :frameInfo="frameInfo"
                       class="main-content"
                     />
-                  </keep-alive>
-                  <component
-                    :is="Comp"
-                    v-else
-                    :key="fullPath"
-                    :frameInfo="frameInfo"
-                    class="main-content"
-                  />
-                </transitionMain>
+                  </transitionMain>
+                </div>
               </div>
               <Footer v-if="!hideFooter" />
             </el-scrollbar>
@@ -197,7 +199,15 @@ const transitionMain = defineComponent({
   width: 100%;
 }
 
-.main-content {
+/* .main-content {
   margin: 24px;
+} */
+.grow_content {
+  /* overflow: auto; */
+  margin: 24px;
+  background-color: var(--el-bg-color);
+  padding: 24px;
+  box-sizing: border-box;
+  border-radius: 8px;
 }
 </style>

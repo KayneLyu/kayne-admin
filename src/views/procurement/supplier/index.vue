@@ -1,9 +1,11 @@
 <script setup lang="ts">
 defineOptions({
-  name: "Welcome"
+  name: "supplier"
 });
 </script>
 
 <template>
-  <h1>金久首页工作台</h1>
+  <div>供应商</div>
 </template>
+
+<style lang="scss" scoped></style>

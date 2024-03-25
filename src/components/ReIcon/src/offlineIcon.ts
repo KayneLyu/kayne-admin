@@ -5,8 +5,10 @@ import { addIcon } from "@iconify/vue/dist/offline";
 // @iconify-icons/ep
 import Lollipop from "@iconify-icons/ep/lollipop";
 import HomeFilled from "@iconify-icons/ep/home-filled";
+import ShoppingCart from "@iconify-icons/ep/shopping-cart";
 addIcon("ep:lollipop", Lollipop);
 addIcon("ep:home-filled", HomeFilled);
+addIcon("ep:shopping-cart", ShoppingCart);
 // @iconify-icons/ri
 import Search from "@iconify-icons/ri/search-line";
 import InformationLine from "@iconify-icons/ri/information-line";
