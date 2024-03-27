@@ -13,8 +13,16 @@ export default {
       name: "purchase",
       component: () => import("@/views/procurement/purchase/index.vue"),
       meta: {
-        title: "采购列表"
+        title: "采购列表",
       },
+    },
+    {
+      path: "/procurement/history/index",
+      name: "history",
+      component: () => import("@/views/procurement/history/index.vue"),
+      meta: {
+        title: "历史采购",
+      }
     },
     {
       path: "/procurement/supplier/index",
@@ -22,14 +30,6 @@ export default {
       component: () => import("@/views/procurement/supplier/index.vue"),
       meta: {
         title: "供应商"
-      }
-    },
-    {
-      path: "/procurement/history/index",
-      name: "history",
-      component: () => import("@/views/procurement/history/index.vue"),
-      meta: {
-        title: "历史采购"
       }
     },
     {

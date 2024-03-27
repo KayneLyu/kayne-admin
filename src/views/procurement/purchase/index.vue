@@ -1,90 +1,76 @@
 <script lang="ts" setup>
-import { ref, reactive } from "vue";
-import type { TableColumns } from "@pureadmin/table";
+import { h, ref } from "vue";
+import OrderComponents from "../components/OrderComponents.vue";
+import Forms from "./form.vue";
+import {
+  addDialog,
+  closeDialog,
+  updateDialog,
+  closeAllDialog
+} from "@/components/ReDialog";
 
 defineOptions({
   name: "purchase"
 });
 
-const columns: Array<TableColumns> = [
+const tableData: Array<ITableData> = [
   {
-    label: "订单编号",
-    prop: "date"
+    date: "2024-03-27",
+    order: 2024032701,
+    status: "待审批",
+    endDate: "2024-04-01",
+    applicant: "邓琳",
+    tips: "路由器"
   },
   {
-    label: "创建日期",
-    prop: "date"
+    date: "2024-03-27",
+    order: 2024032701,
+    status: "待审批",
+    endDate: "2024-04-01",
+    applicant: "邓琳",
+    tips: "风环配件"
   },
   {
-    label: "订单状态",
-    prop: "name"
+    date: "2024-03-27",
+    order: 2024032701,
+    status: "待审批",
+    endDate: "2024-04-01",
+    applicant: "邓琳",
+    tips: "风环配件"
   },
   {
-    label: "到货日期",
-    prop: "name"
-  },
-  {
-    label: "备注",
-    prop: "name"
-  },
-  {
-    label: "操作",
-    prop: "address"
+    date: "2024-03-27",
+    order: 2024032701,
+    status: "待审批",
+    endDate: "2024-04-01",
+    applicant: "邓琳",
+    tips: "风环配件"
   }
 ];
 
-const tableData = [
-  {
-    date: "2030-05-01",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles"
-  },
-  {
-    date: "2030-05-02",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles"
-  },
-  {
-    date: "2030-05-03",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles"
-  },
-  {
-    date: "2030-05-04",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles"
-  }
-];
+const dataList = ref([]);
+let loading = ref(true);
 
-let loading = ref(false);
-const pagination = reactive({
-  pageSize: 5,
-  currentPage: 1,
-  background: true,
-  total: tableData.length
-});
-
-// setTimeout(() => {
-//   loading.value = false;
-// }, 1500);
+setTimeout(() => {
+  dataList.value = tableData;
+  loading.value = false;
+}, 300);
+const addPurchase = () => {
+  addDialog({
+    title: "新增采购申请单",
+    closeOnClickModal: false,
+    contentRenderer: () => h(Forms, {})
+  });
+};
 </script>
 
 <template>
-  <div class="table_container">
-    <pure-table
-      locale="zhCn"
-      border
-      :loading="loading"
-      :data="tableData"
-      :columns="columns"
-      :pagination="pagination"
-      stripe
-    />
+  <div>
+    <div class="mb-5">
+      <el-button @click="addPurchase" type="primary">+ 采购申请</el-button>
+    </div>
+    <OrderComponents :tableData="dataList" :loading="loading" />
   </div>
 </template>
 
-<style scoped lang="scss">
-.table_container {
-  height: 100%;
-}
-</style>
+<style lang="scss" scoped></style>
