@@ -124,6 +124,10 @@ const tableData = ref([
       :data="tableData"
       :columns="columns"
       :row-class-name="tableRowClassName"
+      :header-cell-style="{
+        background: 'var(--el-fill-color-light)',
+        color: 'var(--el-text-color-primary)'
+      }"
     >
       <template #tag="{ row }">
         <el-tag
