@@ -1,13 +1,8 @@
 <script lang="ts" setup>
 import { h, ref } from "vue";
 import OrderComponents from "../components/OrderComponents.vue";
-import Forms from "./form.vue";
-import {
-  addDialog,
-  closeDialog,
-  updateDialog,
-  closeAllDialog
-} from "@/components/ReDialog";
+import AddApplyTable from "./apply/index.vue";
+
 
 defineOptions({
   name: "purchase"
@@ -48,28 +43,20 @@ const tableData: Array<ITableData> = [
   }
 ];
 
-const dataList = ref([]);
+
+const purchaseList = ref<[] | ITableData[]>([]);
 let loading = ref(true);
 
 setTimeout(() => {
-  dataList.value = tableData;
+  purchaseList.value = tableData;
   loading.value = false;
 }, 300);
-const addPurchase = () => {
-  addDialog({
-    title: "新增采购申请单",
-    closeOnClickModal: false,
-    contentRenderer: () => h(Forms, {})
-  });
-};
 </script>
 
 <template>
   <div>
-    <div class="mb-5">
-      <el-button @click="addPurchase" type="primary">+ 采购申请</el-button>
-    </div>
-    <OrderComponents :tableData="dataList" :loading="loading" />
+    <AddApplyTable />
+    <OrderComponents :tableData="purchaseList" :loading="loading" />
   </div>
 </template>
 

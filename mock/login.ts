@@ -22,7 +22,7 @@ export default defineFakeRoute([
         return {
           success: true,
           data: {
-            username: "common",
+            username: "吕康",
             // 一个用户可能有多个角色
             roles: ["common"],
             accessToken: "eyJhbGciOiJIUzUxMiJ9.common",

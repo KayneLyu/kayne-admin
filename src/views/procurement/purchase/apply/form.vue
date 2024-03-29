@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import { useColumns } from "./columns";
-import Empty from "./empty.svg?component";
+import Empty from "@/assets/svg/empty.svg?component";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import AddFill from "@iconify-icons/ep/plus";
 import Delete from "@iconify-icons/ep/delete";
 
-const { columns, dataList, onAdd, onDel } = useColumns();
+const { columns } = useColumns();
+
+const props = defineProps<{
+  dataList: [];
+  onAdd: (e: MouseEvent) => void;
+  onDel: (e: MouseEvent) => void;
+}>();
 </script>
 
 <template>
   <div class="flex">
-    <!-- <el-scrollbar height="540px">
-      <code>
-        <pre class="w-[400px]"> {{ dataList }}</pre>
-      </code>
-    </el-scrollbar> -->
     <pure-table
       row-key="id"
       align-whole="center"

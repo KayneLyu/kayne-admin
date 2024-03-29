@@ -1,55 +1,22 @@
 <script lang="ts" setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, h } from "vue";
 import { message } from "@/utils/message";
 import type { TableColumns } from "@pureadmin/table";
+import {
+  addDialog,
+  closeDialog,
+  updateDialog,
+  closeAllDialog
+} from "@/components/ReDialog";
+import { useColumns } from "./column";
+import Empty from "@/assets/svg/empty.svg?component";
+
+const { editMap, columns, dataList, onEdit, onSave, onCancel, onDel } =
+  useColumns();
 
 defineOptions({
   name: "supplier"
 });
-
-const columns: Array<TableColumns> = [
-  {
-    label: "供应商",
-    prop: "name"
-  },
-  {
-    label: "产品类型",
-    prop: "product"
-  },
-  {
-    label: "产品单价（元/件）",
-    prop: "price"
-  },
-  {
-    label: "交货周期（天）",
-    prop: "duration"
-  },
-  {
-    label: "联系方式",
-    prop: "concat"
-  },
-  {
-    label: "联系地址",
-    prop: "address"
-  },
-  {
-    label: "操作",
-    width: "150",
-    fixed: "right",
-    slot: "operation"
-  }
-];
-
-const tableData = ref([
-  {
-    name: "尚城不锈钢",
-    product: "激光切割",
-    price: "5.5",
-    concat: "13566666666",
-    address: "东莞市万江区",
-    duration: "5"
-  }
-]);
 
 const loading = ref(false);
 
@@ -57,7 +24,7 @@ const pagination = reactive({
   pageSize: 10,
   currentPage: 1,
   background: true,
-  total: tableData.value?.length
+  total: dataList.value.length
 });
 
 // setTimeout(() => {
@@ -65,22 +32,28 @@ const pagination = reactive({
 // }, 1500);
 
 const addPurchase = () => {
-  message("登录成功", { type: "success" });
+  addDialog({
+    title: "新增供应商",
+    closeOnClickModal: false,
+    contentRenderer: () => h("", {})
+  });
 };
 
-const handleClick = row => {};
 </script>
 
 <template>
   <div class="table_container">
     <div class="mb-5">
-      <el-button @click="addPurchase" type="primary">+ 新增供应商</el-button>
+      <el-button class="" @click="addPurchase" type="primary"
+        >+ 新增供应商</el-button
+      >
     </div>
     <pure-table
+      row-key="id"
       locale="zhCn"
       border
       :loading="loading"
-      :data="tableData"
+      :data="dataList"
       :columns="columns"
       :pagination="pagination"
       stripe
@@ -89,6 +62,10 @@ const handleClick = row => {};
         color: 'var(--el-text-color-primary)'
       }"
     >
+      <template #empty>
+        <Empty fill="var(--el-svg-monochrome-grey)" class="m-auto mt-5" />
+        <p>暂无数据</p>
+      </template>
       <template #tag="{ row }">
         <el-tag
           :type="row.status === '已完成' ? 'success' : null"
@@ -104,13 +81,36 @@ const handleClick = row => {};
         </el-tag>
       </template>
 
-      <template #operation="{ row }">
-        <el-button type="primary" size="small" @click="handleClick(row)">
+      <template #operation="{ row, index }">
+        <el-button
+          v-if="!editMap[index]?.editable"
+          class="margin-auto"
+          type="primary"
+          @click="onEdit(row, index)"
+        >
           编辑
         </el-button>
-        <el-button type="danger" size="small" @click="handleClick(row)">
-          删除
-        </el-button>
+        <div v-else>
+          <el-button
+            class="reset-margin"
+            link
+            type="primary"
+            @click="onSave(index)"
+          >
+            保存
+          </el-button>
+          <el-button class="reset-margin" link @click="onCancel(index)">
+            取消
+          </el-button>
+          <el-button
+            class="reset-margin"
+            type="danger"
+            link
+            @click="onDel(row)"
+          >
+            删除
+          </el-button>
+        </div>
       </template>
     </pure-table>
   </div>

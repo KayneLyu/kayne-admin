@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import { ref, reactive } from "vue";
+import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import type { TableColumns } from "@pureadmin/table";
+import Empty from "@/assets/svg/empty.svg?component";
 
 type ITableData = {
   order: number;
@@ -91,6 +92,10 @@ const handleClick = row => {
         color: 'var(--el-text-color-primary)'
       }"
     >
+      <template #empty>
+        <Empty fill="var(--el-svg-monochrome-grey)" class="m-auto mt-5" />
+        <p>暂无数据</p>
+      </template>
       <template #tag="{ row }">
         <el-tag
           :type="row.status === '已完成' ? 'success' : null"
@@ -107,7 +112,7 @@ const handleClick = row => {
       </template>
 
       <template #operation="{ row }">
-        <el-button link type="primary" size="small" @click="handleClick(row)">
+        <el-button type="primary" size="small" @click="handleClick(row)">
           查看详情
         </el-button>
       </template>
