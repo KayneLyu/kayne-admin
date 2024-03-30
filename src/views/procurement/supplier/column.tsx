@@ -1,6 +1,7 @@
-import { ref } from "vue";
+import { ref, createVNode } from "vue";
 import { clone, delObjectProperty } from "@pureadmin/utils";
 import { message } from "@/utils/message";
+import { addDialog } from "@/components/ReDialog";
 
 export function useColumns() {
   const editMap = ref({});
@@ -212,10 +213,20 @@ export function useColumns() {
     editMap.value[index].editable = false;
     dataList.value[index] = delObjectProperty(editMap.value[index], "editable");
   }
+
   function onDel(row) {
-    const index = dataList.value.indexOf(row);
-    console.log(index, row);
-    if (index !== -1) dataList.value.splice(index, 1);
+    addDialog({
+      title: "新增供应商",
+      closeOnClickModal: false,
+      contentRenderer: () => createVNode("P", null, "是否删除该供应商？"),
+      closeCallBack({ args }) {
+        if (args.command !== "sure") {
+          return;
+        }
+        const index = dataList.value.indexOf(row);
+        if (index !== -1) dataList.value.splice(index, 1);
+      }
+    });
   }
 
   return {

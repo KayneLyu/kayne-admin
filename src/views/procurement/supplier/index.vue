@@ -2,14 +2,10 @@
 import { ref, reactive, h } from "vue";
 import { message } from "@/utils/message";
 import type { TableColumns } from "@pureadmin/table";
-import {
-  addDialog,
-  closeDialog,
-  updateDialog,
-  closeAllDialog
-} from "@/components/ReDialog";
+
 import { useColumns } from "./column";
 import Empty from "@/assets/svg/empty.svg?component";
+import Forms from './forms/index.vue';
 
 const { editMap, columns, dataList, onEdit, onSave, onCancel, onDel } =
   useColumns();
@@ -31,23 +27,13 @@ const pagination = reactive({
 //   loading.value = false;
 // }, 1500);
 
-const addPurchase = () => {
-  addDialog({
-    title: "新增供应商",
-    closeOnClickModal: false,
-    contentRenderer: () => h("", {})
-  });
-};
+
 
 </script>
 
 <template>
   <div class="table_container">
-    <div class="mb-5">
-      <el-button class="" @click="addPurchase" type="primary"
-        >+ 新增供应商</el-button
-      >
-    </div>
+    <Forms />
     <pure-table
       row-key="id"
       locale="zhCn"
