@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import { ref, h } from "vue";
 import Forms from "./form.vue";
 import {
@@ -17,7 +17,9 @@ type IApplyItem = {
   person: string;
 };
 
+const loading = ref(false)
 const dataList = ref<Array<IApplyItem>>([]);
+
 // 新增采购项
 function onAdd() {
   dataList.value.push({
@@ -41,6 +43,12 @@ function resetApply() {
   dataList.value = [];
 }
 
+// 提交申请
+const confirm = () => {
+  
+}
+
+
 const addPurchase = () => {
   addDialog({
     title: "新增采购申请单",
@@ -51,6 +59,14 @@ const addPurchase = () => {
       onDel,
       onAdd
     },
+    footerRenderer: ({ options, index }) => (
+      <div>
+        <el-button onClick={() => closeDialog(options, index)}>取消</el-button>
+        <el-button loading={loading} onClick={() => confirm()}>
+          提交
+        </el-button>
+      </div>
+    )
     // closeCallBack: ({ options, args }) => {
     //   console.log(args);
 
@@ -70,27 +86,6 @@ const addPurchase = () => {
     // beforeSure(done, { options, index }) {
     //   done()
     // },
-
-    footerButtons: [
-      {
-        label: "取消",
-        size: "default",
-        type: "info",
-        btnClick: ({ dialog: { options, index }, button }) => {
-          closeDialog(options, index);
-        }
-      },
-      {
-        label: "确定",
-        size: "default",
-        type: "success",
-        loading: true,
-        btnClick: ({ dialog: { options, index }, button }) => {
-          console.log(options, index, button);
-          // closeDialog(options, index);
-        }
-      }
-    ]
   });
 };
 </script>

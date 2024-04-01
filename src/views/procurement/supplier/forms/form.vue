@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
-import { phone, stringInput, numberInput } from "@/utils/formRules.ts";
+import { phone, stringInput, numberInput } from "@/utils/formRules";
 
 const ruleFormRef = ref<FormInstance>();
-const loading = ref(false)
+const loading = ref(false);
 const ruleForm = reactive({
   name: "",
   product: "",
@@ -24,17 +24,14 @@ const rules = reactive<FormRules<typeof ruleForm>>({
 });
 
 const submitForm = () => {
-  loading.value = true
   if (!ruleFormRef.value) return;
   ruleFormRef.value.validate(valid => {
     if (valid) {
-      console.log("submit!");
+      loading.value = true;
       setTimeout(() => {
-        loading.value = false
-      }, 2000)
-      return true;
+        loading.value = false;
+      }, 2000);
     } else {
-      console.log("error submit!");
       return false;
     }
   });
