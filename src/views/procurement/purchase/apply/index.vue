@@ -1,12 +1,7 @@
 <script setup lang="tsx">
-import { ref, h } from "vue";
+import { ref } from "vue";
 import Forms from "./form.vue";
-import {
-  addDialog,
-  closeDialog,
-  updateDialog,
-  closeAllDialog
-} from "@/components/ReDialog";
+import { addDialog, closeDialog, DialogOptions } from "@/components/ReDialog";
 
 type IApplyItem = {
   id: number;
@@ -17,7 +12,7 @@ type IApplyItem = {
   person: string;
 };
 
-const loading = ref(false)
+const loading = ref(false);
 const dataList = ref<Array<IApplyItem>>([]);
 
 // 新增采购项
@@ -39,15 +34,15 @@ function onDel(row) {
 }
 
 // 重置申请单
-function resetApply() {
+function resetApply(options: DialogOptions, index: number) {
+  closeDialog(options, index);
   dataList.value = [];
 }
 
-// 提交申请
-const confirm = () => {
-  
-}
-
+// 提交申请单
+const confirm = (options: DialogOptions, index: number) => {
+  closeDialog(options, index);
+};
 
 const addPurchase = () => {
   addDialog({
@@ -61,8 +56,11 @@ const addPurchase = () => {
     },
     footerRenderer: ({ options, index }) => (
       <div>
-        <el-button onClick={() => closeDialog(options, index)}>取消</el-button>
-        <el-button loading={loading} onClick={() => confirm()}>
+        <el-button onClick={() => resetApply(options, index)}>取消</el-button>
+        <el-button
+          loading={loading.value}
+          onClick={() => confirm(options, index)}
+        >
           提交
         </el-button>
       </div>
