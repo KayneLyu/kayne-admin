@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import BackIcon from "@/assets/svg/back.svg?component";
 
 const tableRowClassName = ({ rowIndex }: { rowIndex: number }) => {
   if (rowIndex === 0 || rowIndex === 2 || rowIndex === 3) {
@@ -25,6 +26,10 @@ const filterHandler = (value, row, column) => {
   const property = column["property"];
   return row[property] === value;
 };
+
+const props = defineProps<{
+  backOrder: (e) => void;
+}>();
 
 const columns: TableColumnList = [
   {
@@ -115,6 +120,9 @@ const tableData = ref([
 <template>
   <div>
     <div class="mb-5">
+      <el-button class="mr-3" @click="props.backOrder">
+        <BackIcon fill="var(--el-button-text-color)" class="text-xl" />返回</el-button
+      >
       <el-button @click="clearFilter" type="primary">重置筛选</el-button>
     </div>
     <pure-table

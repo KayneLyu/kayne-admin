@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import OrderComponents from "../components/OrderComponents.vue";
+import DetailsComponent from "../components/Details.vue";
+
 defineOptions({
   name: "history"
 });
@@ -45,10 +47,25 @@ setTimeout(() => {
   dataList.value = tableData;
   loading.value = false;
 }, 1000);
+
+const isShowDetails = ref(false);
+const checkOutDetails = (order?: number) => {
+  isShowDetails.value = !isShowDetails.value;
+  console.log(order, "order");
+};
 </script>
 
 <template>
-  <OrderComponents :tableData="dataList" :loading="loading" />
+  <transition>
+    <div v-if="!isShowDetails">
+      <OrderComponents
+        :tableData="dataList"
+        :loading="loading"
+        :checkDetails="checkOutDetails"
+      />
+    </div>
+    <div v-else>
+      <DetailsComponent :backOrder="checkOutDetails" />
+    </div>
+  </transition>
 </template>
-
-<style lang="scss" scoped></style>

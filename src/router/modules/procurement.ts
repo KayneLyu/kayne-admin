@@ -32,14 +32,5 @@ export default {
         title: "供应商"
       }
     },
-    {
-      path: "/procurement/details/index",
-      name: "procurementDetails",
-      component: () => import("@/views/procurement/details/index.vue"),
-      meta: {
-        title: "订单详情",
-        showLink: false
-      }
-    }
   ]
 } satisfies RouteConfigsTable;

@@ -2,8 +2,7 @@
 import { h, ref } from "vue";
 import OrderComponents from "../components/OrderComponents.vue";
 import AddApplyTable from "./apply/index.vue";
-
-
+import DetailsComponent from "../components/Details.vue";
 defineOptions({
   name: "purchase"
 });
@@ -43,21 +42,35 @@ const tableData: Array<ITableData> = [
   }
 ];
 
-
 const purchaseList = ref<[] | ITableData[]>([]);
 let loading = ref(true);
+let isShowDetails = ref(false);
 
 setTimeout(() => {
   purchaseList.value = tableData;
   loading.value = false;
 }, 300);
+
+const checkOutDetails = (order?: number) => {
+  isShowDetails.value = !isShowDetails.value;
+  console.log(order, "order");
+};
 </script>
 
 <template>
-  <div>
-    <AddApplyTable />
-    <OrderComponents :tableData="purchaseList" :loading="loading" />
-  </div>
+  <transition>
+    <div v-if="!isShowDetails">
+      <AddApplyTable />
+      <OrderComponents
+        :tableData="purchaseList"
+        :loading="loading"
+        :checkDetails="checkOutDetails"
+      />
+    </div>
+    <div v-else>
+      <DetailsComponent :backOrder="checkOutDetails"/>
+    </div>
+  </transition>
 </template>
 
 <style lang="scss" scoped></style>

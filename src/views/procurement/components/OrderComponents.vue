@@ -12,10 +12,6 @@ type ITableData = {
   tips: string;
 };
 
-defineOptions({
-  name: "purchase"
-});
-
 // 初始化router
 const router = useRouter();
 
@@ -23,7 +19,8 @@ const props = defineProps({
   tableData: Array<ITableData>,
   loading: {
     default: true
-  }
+  },
+  checkDetails: Function
 });
 const columns: Array<TableColumns> = [
   {
@@ -71,10 +68,6 @@ const pagination = reactive({
 //   loading.value = false;
 // }, 1500);
 
-const handleClick = row => {
-  console.log(row);
-  router.push("/procurement/details/index");
-};
 </script>
 
 <template>
@@ -112,7 +105,7 @@ const handleClick = row => {
       </template>
 
       <template #operation="{ row }">
-        <el-button type="primary" size="small" @click="handleClick(row)">
+        <el-button type="primary" size="small" @click="checkDetails(row)">
           查看详情
         </el-button>
       </template>
