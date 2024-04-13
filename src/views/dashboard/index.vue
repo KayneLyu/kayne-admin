@@ -1,13 +1,14 @@
 <template>
-  <div>test</div>
+  <div>
+    <WeatherComponent />
+  </div>
 </template>
 
-<script lang="ts">
-export default {
-  setup() {
-    return {};
-  }
-};
+<script setup lang="ts">
+import WeatherComponent from "./weather.vue";
+defineOptions({
+  name: "Dashboard"
+});
 </script>
 
 <style lang="scss" scoped></style>
