@@ -15,6 +15,9 @@ export type RequestMethods = Extract<
 >;
 
 export interface PureHttpError extends AxiosError {
+  response?: {
+    data: KayResponse<k>
+  },
   isCancelRequest?: boolean;
 }
 
@@ -44,4 +47,11 @@ export default class PureHttp {
     params?: T,
     config?: PureHttpRequestConfig
   ): Promise<P>;
+}
+
+export interface KayResponse<k> {
+  status: number,
+  success: boolean,
+  message: string,
+  data:k
 }

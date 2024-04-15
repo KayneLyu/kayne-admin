@@ -105,7 +105,7 @@ const pagination = reactive({
       </template>
 
       <template #operation="{ row }">
-        <el-button type="primary" size="small" @click="checkDetails(row)">
+        <el-button link type="primary" size="small"  @click="checkDetails(row)">
           查看详情
         </el-button>
       </template>

@@ -127,7 +127,6 @@ const transitionMain = defineComponent({
                 <backTop />
               </el-backtop>
               <div class="grow">
-                <div class="grow_content">
                   <transitionMain :route="route">
                     <keep-alive
                       v-if="isKeepAlive"
@@ -149,7 +148,6 @@ const transitionMain = defineComponent({
                     />
                   </transitionMain>
                 </div>
-              </div>
               <Footer v-if="!hideFooter" />
             </el-scrollbar>
             <div v-else class="grow">
@@ -184,7 +182,7 @@ const transitionMain = defineComponent({
   </section>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .app-main {
   position: relative;
   width: 100%;
@@ -199,15 +197,17 @@ const transitionMain = defineComponent({
   width: 100%;
 }
 
-/* .main-content {
+.main-content {
   margin: 24px;
-} */
-.grow_content {
-  /* overflow: auto; */
+}
+
+/* .grow_content {
+  overflow: auto;
   margin: 24px;
   background-color: var(--el-bg-color);
   padding: 24px;
   box-sizing: border-box;
   border-radius: 8px;
-}
+} */
+
 </style>

@@ -17,7 +17,7 @@ export default {
       name: "Welcome",
       component: () => import("@/views/dashboard/index.vue"),
       meta: {
-        title: "首页",
+        title: "工作台",
         showLink: VITE_HIDE_HOME === "true" ? false : true
       }
     }

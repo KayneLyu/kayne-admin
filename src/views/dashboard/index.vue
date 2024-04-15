@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div >
     <WeatherComponent />
+
   </div>
 </template>
 

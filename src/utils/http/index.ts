@@ -7,7 +7,8 @@ import type {
   PureHttpError,
   RequestMethods,
   PureHttpResponse,
-  PureHttpRequestConfig
+  PureHttpRequestConfig,
+  KayResponse
 } from "./types.d";
 import { stringify } from "qs";
 import NProgress from "../progress";
@@ -151,7 +152,7 @@ class PureHttp {
     url: string,
     param?: AxiosRequestConfig,
     axiosConfig?: PureHttpRequestConfig
-  ): Promise<T> {
+  ): Promise<KayResponse<T>> {
     const config = {
       method,
       url,
@@ -166,29 +167,32 @@ class PureHttp {
         .then((response: undefined) => {
           resolve(response);
         })
-        .catch(error => {
+        .catch((error: PureHttpError) => {
+          if (error.response) {
+            reject(error.response.data);
+          }
           reject(error);
         });
     });
   }
 
   /** 单独抽离的post工具函数 */
-  public post<T, P>(
-    url: string,
-    params?: AxiosRequestConfig<T>,
-    config?: PureHttpRequestConfig
-  ): Promise<P> {
-    return this.request<P>("post", url, params, config);
-  }
+  // public post<T, P>(
+  //   url: string,
+  //   params?: AxiosRequestConfig<T>,
+  //   config?: PureHttpRequestConfig
+  // ): Promise<P> {
+  //   return this.request<P>("post", url, params, config);
+  // }
 
-  /** 单独抽离的get工具函数 */
-  public get<T, P>(
-    url: string,
-    params?: AxiosRequestConfig<T>,
-    config?: PureHttpRequestConfig
-  ): Promise<P> {
-    return this.request<P>("get", url, params, config);
-  }
+  // /** 单独抽离的get工具函数 */
+  // public get<T, P>(
+  //   url: string,
+  //   params?: AxiosRequestConfig<T>,
+  //   config?: PureHttpRequestConfig
+  // ): Promise<P> {
+  //   return this.request<P>("get", url, params, config);
+  // }
 }
 
 export const http = new PureHttp();
