@@ -1,58 +1,41 @@
 <template>
-  <el-card>
-    <p>{{ username + "，" + welcome.greeting }}</p>
-    <button @click="weatherHandler">获取天气</button>
+  <el-card style="min-width: 200px">
+    <div>
+      <p class="font-bold mb-2">{{ weatherInfo?.city }}</p>
+      <div class="flex flex-nowrap">
+        <div class="mr-3">
+          <ThunderStormIcon />
+        </div>
+        <div>
+          <p>
+            <strong>{{ weatherInfo?.weather }}</strong>
+          </p>
+          <p>
+            <strong>{{ weatherInfo?.temperature_float }}</strong> ℃
+          </p>
+        </div>
+      </div>
+      <p>
+        空气湿度：<strong>{{ weatherInfo?.humidity_float }}</strong>
+      </p>
+    </div>
   </el-card>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { getWeatherInfo } from "@/api/dashboard";
-import { useNav } from "@/layout/hooks/useNav";
-
-const { username } = useNav();
-
-function getGreetingAndEncouragement(currentTime: string) {
-  const date = new Date(currentTime);
-  const currentHour = date.getHours();
-
-  let greeting = "";
-  let encouragement = "";
-
-  if (currentHour >= 5 && currentHour < 12) {
-    greeting = "早上好";
-    encouragement = "努力工作，迎接新的一天！";
-  } else if (currentHour >= 12 && currentHour < 14) {
-    greeting = "中午好";
-    encouragement = "吃好午饭，继续保持！";
-  } else if (currentHour >= 14 && currentHour < 18) {
-    greeting = "下午好";
-    encouragement = "保持专注，工作效率更高！";
-  } else {
-    greeting = "晚上好";
-    encouragement = "放松一下，明天继续加油！";
-  }
-
-  return { greeting, encouragement };
-}
-
-const welcome = ref({
-  greeting: "",
-  encouragement: ""
-});
-const weatherInfo = ref();
+import { getWeatherInfo, getSentence, IWeatherInfo } from "@/api/dashboard";
+import PartlyCloudyIcon from "@/assets/svg/partly_cloudy.svg?component";
+import SunnyIcon from "@/assets/svg/sunny.svg?component";
+import CloudyIcon from "@/assets/svg/cloudy.svg?component";
+import RainIcon from "@/assets/svg/rain.svg?component";
+import ThunderStormIcon from "@/assets/svg/thunder_storm.svg?component";
+const weatherInfo = ref<IWeatherInfo>();
 const weatherHandler = async () => {
   try {
-    // const result = await getWeatherInfo();
-    // weatherInfo.value = result.data;
-    // const { reporttime } = result.data;
-
-    const reporttime = '2024-04-15 16:30:23'
-    const { greeting, encouragement } = getGreetingAndEncouragement(reporttime);
-    welcome.value = {
-      greeting,
-      encouragement
-    };
+    const result = await getWeatherInfo();
+    const sentence = await getSentence();
+    weatherInfo.value = result.data;
   } catch (error) {
     console.log(error);
   }

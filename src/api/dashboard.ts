@@ -1,6 +1,6 @@
 import { http } from "@/utils/http";
 
-type IWeatherInfo = {
+export type IWeatherInfo = {
   // 省份
   province: string,
   /*
@@ -12,17 +12,20 @@ type IWeatherInfo = {
   weather: string,
   // 天气
   temperature: number,
-  // 天气
+  // 风向
   winddirection: string,
-  // 天气
+  // 风力级别，单位：级
   windpower: string,
-  // 天气
+  //空气湿度
   humidity: string,
-  // 天气
+  // 数据发布的时间
   reporttime: Date,
   temperature_float: number,
   humidity_float: number
 }
 export const getWeatherInfo = () => {
   return http.request<IWeatherInfo>("get", 'http://localhost:3000/weather')
+}
+export const getSentence = () => {
+  return http.request("get", 'http://localhost:3000/sentence')
 }
