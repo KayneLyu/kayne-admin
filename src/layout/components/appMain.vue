@@ -5,7 +5,7 @@ import KeepAliveFrame from "./keepAliveFrame/index.vue";
 import backTop from "@/assets/svg/back_top.svg?component";
 import { h, computed, Transition, defineComponent } from "vue";
 import { usePermissionStoreHook } from "@/store/modules/permission";
-
+import { useRoute } from "vue-router";
 const props = defineProps({
   fixedHeader: Boolean
 });
@@ -93,6 +93,9 @@ const transitionMain = defineComponent({
     );
   }
 });
+
+const route = useRoute();
+
 </script>
 
 <template>
@@ -127,27 +130,27 @@ const transitionMain = defineComponent({
                 <backTop />
               </el-backtop>
               <div class="grow">
-                  <transitionMain :route="route">
-                    <keep-alive
-                      v-if="isKeepAlive"
-                      :include="usePermissionStoreHook().cachePageList"
-                    >
-                      <component
-                        :is="Comp"
-                        :key="fullPath"
-                        :frameInfo="frameInfo"
-                        class="main-content"
-                      />
-                    </keep-alive>
+                <transitionMain :route="route">
+                  <keep-alive
+                    v-if="isKeepAlive"
+                    :include="usePermissionStoreHook().cachePageList"
+                  >
                     <component
                       :is="Comp"
-                      v-else
                       :key="fullPath"
                       :frameInfo="frameInfo"
                       class="main-content"
                     />
-                  </transitionMain>
-                </div>
+                  </keep-alive>
+                  <component
+                    :is="Comp"
+                    v-else
+                    :key="fullPath"
+                    :frameInfo="frameInfo"
+                    class="main-content"
+                  />
+                </transitionMain>
+              </div>
               <Footer v-if="!hideFooter" />
             </el-scrollbar>
             <div v-else class="grow">
@@ -209,5 +212,4 @@ const transitionMain = defineComponent({
   box-sizing: border-box;
   border-radius: 8px;
 } */
-
 </style>

@@ -1,9 +1,9 @@
 <template>
-  <el-card style="width: 40vw;">
-    <p class="text-xl font-bold">
+  <el-card style="width: 40vw">
+    <p class="text-xl font-bold mt-2">
       {{ welcome?.greeting + username + " ，" + welcome?.encouragement }}
     </p>
-    <p class="mt-10 text-base italic">
+    <p v-if="poetry" class="mt-8 text-base italic">
       诗词鉴赏：
       <span class="font-bold">{{ poetry?.sentence }}</span>
       {{ " — " + poetry?.author }}
@@ -42,25 +42,28 @@ function getGreetingAndEncouragement() {
   return { greeting, encouragement };
 }
 
-const poetry = ref();
-const welcome = ref();
+const poetry = ref(null);
+const welcome = ref({
+  greeting: "",
+  encouragement: ""
+});
 
 const weatherHandler = async () => {
   try {
     const sentence = await getSentence();
     poetry.value = sentence.data;
-    const { greeting, encouragement } = getGreetingAndEncouragement();
-    welcome.value = {
-      greeting,
-      encouragement
-    };
   } catch (error) {
     console.log(error);
   }
 };
 
 onMounted(() => {
-  weatherHandler();
+  // weatherHandler();
+  const { greeting, encouragement } = getGreetingAndEncouragement();
+  welcome.value = {
+    greeting,
+    encouragement
+  };
 });
 </script>
 

@@ -1,11 +1,12 @@
 <template>
-  <el-card shadow="never">
-    <div class="flex justify-between p-10">
+  <el-card class="mt-3">
+    <div class="flex justify-between">
       <span class="text-md font-medium">最新动态</span>
     </div>
     <el-scrollbar max-height="504" class="mt-3">
       <el-timeline>
         <el-timeline-item
+          class="ml-1"
           v-for="(item, index) in latestNewsData"
           :key="index"
           center
