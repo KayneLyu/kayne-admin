@@ -58,14 +58,18 @@ const checkOutDetails = (order?: number) => {
 <template>
   <transition>
     <div v-if="!isShowDetails">
-      <OrderComponents
-        :tableData="dataList"
-        :loading="loading"
-        :checkDetails="checkOutDetails"
-      />
+      <el-card>
+        <OrderComponents
+          :tableData="dataList"
+          :loading="loading"
+          :checkDetails="checkOutDetails"
+        />
+      </el-card>
     </div>
     <div v-else>
-      <DetailsComponent :backOrder="checkOutDetails" />
+      <el-card>
+        <DetailsComponent :backOrder="checkOutDetails" />
+      </el-card>
     </div>
   </transition>
 </template>

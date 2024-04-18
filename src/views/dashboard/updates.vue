@@ -1,9 +1,9 @@
 <template>
-  <el-card class="mt-3">
+  <el-card>
     <div class="flex justify-between">
       <span class="text-md font-medium">最新动态</span>
     </div>
-    <el-scrollbar max-height="504" class="mt-3">
+    <el-scrollbar max-height="400" class="mt-3">
       <el-timeline>
         <el-timeline-item
           class="ml-1"
@@ -24,7 +24,7 @@
         >
           <p class="text-text_color_regular text-sm">
             {{
-              `新增 ${item.requiredNumber} 条问题，${item.resolveNumber} 条已解决`
+              `吕敬创建了采购订单`
             }}
           </p>
         </el-timeline-item>
