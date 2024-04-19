@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, type Ref } from "vue";
+import Print from "@/utils/print";
 import BackIcon from "@/assets/svg/back.svg?component";
 
 const tableRowClassName = ({ rowIndex }: { rowIndex: number }) => {
@@ -29,6 +30,7 @@ const filterHandler = (value, row, column) => {
 
 const props = defineProps<{
   backOrder: (e) => void;
+  printRef?: Ref;
 }>();
 
 const columns: TableColumnList = [
@@ -115,15 +117,23 @@ const tableData = ref([
     itemStatus: "已完成"
   }
 ]);
+
+const print = () => {
+  Print(tableRef.value.getTableDoms().tableWrapper).toPrint;
+};
 </script>
 
 <template>
   <div>
     <div class="mb-5">
       <el-button class="mr-3" @click="props.backOrder">
-        <BackIcon fill="var(--el-button-text-color)" class="text-xl" />返回</el-button
+        <BackIcon
+          fill="var(--el-button-text-color)"
+          class="text-xl"
+        />返回</el-button
       >
       <el-button @click="clearFilter" type="primary">重置筛选</el-button>
+      <el-button @click="print" type="primary">打印</el-button>
     </div>
     <pure-table
       border

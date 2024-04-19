@@ -38,6 +38,29 @@ const permissionRouter = {
   ]
 };
 
+const UserRouter = {
+  path: "/users/index",
+  name: "UsersPage",
+  meta: {
+    title: "用户管理",
+    icon: "ep:user",
+    roles: ["admin"],
+    rank: 8
+  },
+  // children: [
+  //   {
+  //     path: "/user/index",
+  //     name: "UsersPage",
+  //     meta: {
+  //       title: "用户管理",
+  //       icon: "ep:user",
+  //       rank: 8,
+  //       roles: ["admin"],
+  //     },
+  //   }
+  // ]
+}
+
 export default defineFakeRoute([
   {
     url: "/get-async-routes",
@@ -45,7 +68,7 @@ export default defineFakeRoute([
     response: () => {
       return {
         success: true,
-        data: [permissionRouter]
+        data: [permissionRouter, UserRouter]
       };
     }
   }

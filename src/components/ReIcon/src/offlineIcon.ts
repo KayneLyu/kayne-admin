@@ -6,11 +6,14 @@ import { addIcon } from "@iconify/vue/dist/offline";
 import Lollipop from "@iconify-icons/ep/lollipop";
 import HomeFilled from "@iconify-icons/ep/home-filled";
 import ShoppingCart from "@iconify-icons/ep/shopping-cart";
+import User from "@iconify-icons/ep/user";
 addIcon("ep:lollipop", Lollipop);
 addIcon("ep:home-filled", HomeFilled);
 addIcon("ep:shopping-cart", ShoppingCart);
+addIcon("ep:user", User);
 // @iconify-icons/ri
 import Search from "@iconify-icons/ri/search-line";
 import InformationLine from "@iconify-icons/ri/information-line";
+
 addIcon("ri:search-line", Search);
 addIcon("ri:information-line", InformationLine);

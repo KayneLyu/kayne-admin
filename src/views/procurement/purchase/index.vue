@@ -55,6 +55,7 @@ const checkOutDetails = (order?: number) => {
   isShowDetails.value = !isShowDetails.value;
   console.log(order, "order");
 };
+
 </script>
 
 <template>

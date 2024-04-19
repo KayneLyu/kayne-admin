@@ -24,9 +24,9 @@ import Updates from "./updates.vue";
 import NoticeComponent from "./notice.vue";
 import ProjectComponent from "./project.vue";
 import TodoListComponent from "./todo.vue";
-// defineOptions({
-//   name: "Welcome"
-// });
+defineOptions({
+  name: "Dashboard"
+});
 </script>
 
 <style lang="scss" scoped>
