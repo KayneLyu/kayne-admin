@@ -1,6 +1,6 @@
 <template>
   <el-card class="h-full">
-    <p>待办事项</p>
+    <p class="font-bold">待办事项</p>
     <div class="mt-3">
       <el-alert title="金久称重已过交货期" type="error" />
       <el-alert title="风环电机库存不足" type="warning" />

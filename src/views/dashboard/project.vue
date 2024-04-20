@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, onMounted } from "vue";
+import { clone, useWatermark, delay } from "@pureadmin/utils";
 import dayjs from "dayjs";
 
 const columns: TableColumnList = [
@@ -56,6 +58,22 @@ const tableData = [
   }
 ];
 
+const waterRef = ref();
+
+onMounted(() => {
+  // https://pure-admin-utils.netlify.app/hooks/useWatermark/useWatermark.html
+  const { setWatermark } = useWatermark(
+    waterRef.value.getTableDoms().tableWrapper
+  );
+  setWatermark("金久自动化", {
+    font: "18px Microsoft YaHei",
+    globalAlpha: 0.8,
+    forever: true,
+    width: 240,
+    height: 90
+  });
+});
+
 const checkDetails = row => {
   console.log(row);
 };
@@ -63,11 +81,12 @@ const checkDetails = row => {
 
 <template>
   <el-card>
-    <p class="mb-3">项目进展</p>
+    <p class="mb-3 font-bold">项目进展</p>
     <pure-table
+      ref="waterRef"
       :data="tableData.concat(tableData).concat(tableData)"
       :columns="columns"
-      height="300"
+      height="320"
     >
       <template #operation="{ row }">
         <el-button link type="primary" @click="checkDetails(row)">

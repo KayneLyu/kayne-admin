@@ -5,11 +5,11 @@
       <WelcomeComponent />
       <QuickStart />
     </div>
-    <div class="section_container mt-3 section">
+    <div class="section_container mt-3">
       <ProjectComponent class="w-2/3" />
       <NoticeComponent class="flex-auto" />
     </div>
-    <div class="section_container mt-3 flex-auto">
+    <div class="section_container mt-3 h-100% section">
       <TodoListComponent class=" w-2/3" />
       <Updates class="flex-auto" />
     </div>
@@ -38,5 +38,7 @@ defineOptions({
   flex-wrap: wrap;
   gap: 0.75rem;
   width: 100%;
+}
+.section {
 }
 </style>

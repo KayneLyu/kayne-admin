@@ -1,9 +1,9 @@
 <template>
   <el-card>
     <div class="flex justify-between">
-      <span class="text-md font-medium">最新动态</span>
+      <span class="text-md font-bold">最新动态</span>
     </div>
-    <el-scrollbar max-height="400" class="mt-3">
+    <el-scrollbar max-height="500" class="mt-3">
       <el-timeline>
         <el-timeline-item
           class="ml-1"

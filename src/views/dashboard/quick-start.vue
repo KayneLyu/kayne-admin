@@ -1,6 +1,6 @@
 <template>
   <el-card style="flex: 1">
-    <p>快速开始</p>
+    <p class="font-bold">快速开始</p>
     <ul>
       <li v-for="(item, key) in startMap" :key="key">
         <RouterLink :style="{background: item.bgcolor}" :to="item.path">{{
