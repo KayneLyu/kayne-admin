@@ -1,3 +1,4 @@
+
 /**
  * @采购订单
  */
@@ -19,6 +20,18 @@ interface IWeather {
   info: string,
   infocode: number,
   lives: [
-    
+
   ]
+};
+
+/**
+ * @产品配置
+ */
+interface IConfiguration {
+  id: number,
+  device: string,
+  name: string,
+  type: string,
+  create: string,
+  update: string
 };

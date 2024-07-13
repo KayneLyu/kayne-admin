@@ -5,7 +5,7 @@ export default {
     icon: "ep:shopping-cart",
     // showLink: false,
     title: "采购管理",
-    rank: 2
+    rank: 3
   },
   children: [
     {

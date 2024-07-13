@@ -7,9 +7,12 @@ import Lollipop from "@iconify-icons/ep/lollipop";
 import HomeFilled from "@iconify-icons/ep/home-filled";
 import ShoppingCart from "@iconify-icons/ep/shopping-cart";
 import User from "@iconify-icons/ep/user";
+import Config from "@iconify-icons/ep/management";
+
 addIcon("ep:lollipop", Lollipop);
 addIcon("ep:home-filled", HomeFilled);
 addIcon("ep:shopping-cart", ShoppingCart);
+addIcon("ep:management", Config);
 addIcon("ep:user", User);
 // @iconify-icons/ri
 import Search from "@iconify-icons/ri/search-line";
