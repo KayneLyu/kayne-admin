@@ -29,7 +29,7 @@ const columns: Array<TableColumns> = [
     prop: "name"
   },
   {
-    label: "类型",
+    label: "分类",
     prop: "type"
   },
   {

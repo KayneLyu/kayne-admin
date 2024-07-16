@@ -1,4 +1,4 @@
-import { ref, createVNode } from "vue";
+import { ref, createVNode, onMounted } from "vue";
 import { clone, delObjectProperty } from "@pureadmin/utils";
 import { message } from "@/utils/message";
 import { addDialog } from "@/components/ReDialog";
@@ -24,6 +24,10 @@ export function useColumns() {
       duration: "2"
     }
   ];
+
+  onMounted(() => {
+    
+  });
 
   const dataList = ref(clone(tableData, true));
 

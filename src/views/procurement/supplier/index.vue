@@ -5,16 +5,34 @@ import type { TableColumns } from "@pureadmin/table";
 
 import { useColumns } from "./column";
 import Empty from "@/assets/svg/empty.svg?component";
-import Forms from './forms/index.vue';
+import Forms from "./forms/index.vue";
 
-const { editMap, columns, dataList, onEdit, onSave, onCancel, onDel } =
-  useColumns();
+const { editMap, columns, onEdit, onSave, onCancel, onDel } = useColumns();
 
 defineOptions({
   name: "supplier"
 });
 
 const loading = ref(false);
+
+const dataList = ref([
+  {
+    name: "尚城不锈钢",
+    product: "激光切割",
+    price: "5.5",
+    concat: "13566666666",
+    address: "东莞市万江区",
+    duration: "5"
+  },
+  {
+    name: "尚城不锈钢2",
+    product: "激光切割",
+    price: "5.5",
+    concat: "13566666666",
+    address: "东莞市万江区",
+    duration: "2"
+  }
+]);
 
 const pagination = reactive({
   pageSize: 10,
@@ -26,9 +44,6 @@ const pagination = reactive({
 // setTimeout(() => {
 //   loading.value = false;
 // }, 1500);
-
-
-
 </script>
 
 <template>
