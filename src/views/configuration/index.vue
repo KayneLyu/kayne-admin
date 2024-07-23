@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useRouter } from "vue-router";
 import DeviceList from "./device-table.vue";
 
 defineOptions({
@@ -23,12 +24,24 @@ const deviceTableData: IConfiguration[] = [
     update: "2024-07-13"
   }
 ];
+
+const router = useRouter();
+function checkDetails(model) {
+  router.push({
+    name: "product_details",
+    params: { device: model.device }
+  });
+}
 </script>
 
 <template>
   <div class="table_container">
     <el-card>
-      <DeviceList :tableData="deviceTableData" :loading="false" />
+      <DeviceList
+        :checkDetails="checkDetails"
+        :tableData="deviceTableData"
+        :loading="false"
+      />
     </el-card>
   </div>
 </template>

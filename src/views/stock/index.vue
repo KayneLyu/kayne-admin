@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TableComponent from "./table.vue";
 import AddForm from "./apply/index.vue";
+import QueryTable from "./query/index.vue";
 
 defineOptions({
   name: "Stock"
@@ -10,7 +11,10 @@ defineOptions({
 <template>
   <div class="stock_container">
     <el-card>
-      <AddForm />
+      <div class="query_class">
+        <QueryTable />
+        <AddForm />
+      </div>
       <TableComponent />
     </el-card>
   </div>
@@ -21,6 +25,10 @@ defineOptions({
   height: 100%;
 }
 .header {
+  display: flex;
+  justify-content: space-between;
+}
+.query_class {
   display: flex;
   justify-content: space-between;
 }

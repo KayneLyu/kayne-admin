@@ -17,21 +17,12 @@ function onCancel() {
 
 <template>
   <div class="button_container">
-
-    <div class="search">
-      <el-button
-      type="primary"
-      @click="dialogFormVisible = true"
-      size="large"
-    >
-      查询
-    </el-button>
-    </div>
     <el-button
       type="primary"
       @click="dialogFormVisible = true"
       class="mb-5"
       size="large"
+      :icon="useRenderIcon(AddFill)"
     >
       添加零件入库
     </el-button>
