@@ -62,7 +62,7 @@ const resetOptions = () => {
         class="input-with-select"
       >
         <template #append>
-          <el-button type="warning" :icon="Search" @click="searchName"
+          <el-button type="primary" :icon="Search" @click="searchName"
             >搜索</el-button
           >
         </template>
@@ -111,5 +111,9 @@ const resetOptions = () => {
 <style lang="scss" scoped>
 .select_query {
   margin: 10px 0;
+}
+:deep(.el-input-group__append) {
+  background: var(--el-color-primary) !important;
+  color: var(--el-color-white);
 }
 </style>

@@ -72,6 +72,7 @@ export function useColumns() {
       use: [1],
       unit: "个",
       numbers: 1,
+      process: "外购",
       update: "2024/7/16"
     },
     {
@@ -83,6 +84,7 @@ export function useColumns() {
       use: [3],
       unit: "个",
       numbers: 1,
+      process: "外购",
       update: "2024/7/16"
     }
   ];
@@ -227,13 +229,18 @@ export function useColumns() {
       )
     },
     {
+      label: "工序",
+      prop: "process",
+      cellRenderer: ({ row, index }) => <p>{row.process}</p>
+    },
+    {
       label: "更新时间",
       prop: "update",
       cellRenderer: ({ row, index }) => <p>{row.update}</p>
     },
     {
       label: "操作",
-      width: "180",
+      width: "150",
       fixed: "right",
       slot: "operation"
     }
